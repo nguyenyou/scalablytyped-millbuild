@@ -50,5 +50,5 @@ object mphases extends BaseModule {
 }
 
 object `mimporter-portable` extends BaseModule {
-  def moduleDeps = Seq(mcore, mlogging)
+  def moduleDeps = Seq(mphases, mts, mscalajs)
 }
