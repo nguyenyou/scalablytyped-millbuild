@@ -68,3 +68,7 @@ object `mimporter-portable` extends BaseModule with BuildInfo {
 object mimporter extends BaseModule {
   def moduleDeps = Seq(`mimporter-portable`)
 }
+
+object mcli extends BaseModule {
+  def moduleDeps = Seq(mimporter)
+}
