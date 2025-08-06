@@ -1,0 +1,10 @@
+{
+  "name": "scalablytyped-converter",
+  "version": "0.0.1",
+  "dependencies": {
+    "class-variance-authority": "0.7.1"
+  },
+  "devDependencies": {
+    "typescript": "5.9.2"
+  }
+}
