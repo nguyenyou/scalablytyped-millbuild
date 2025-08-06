@@ -24,7 +24,7 @@ object PersistingParser {
           },
           logger,
         ) {
-          case (inFile, bytes) => parser.parseFileContent(inFile, bytes)
+          case (inFile: InFile, bytes: Array[Byte]) => parser.parseFileContent(inFile, bytes)
         }
         inFile => pf((inFile, os.read.bytes(inFile.path)))
       case None =>
