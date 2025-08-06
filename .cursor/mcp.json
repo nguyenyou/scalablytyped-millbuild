@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "Converter-metals": {
+      "url": "http://localhost:52833/sse"
+    }
+  }
+}

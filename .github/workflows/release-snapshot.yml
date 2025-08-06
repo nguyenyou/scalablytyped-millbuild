@@ -1,0 +1,27 @@
+# note that the proper release is made manually with the release script because it's
+# a heavy operation (builds all demo repos)
+# that's why we don't trigger on tag
+name: Release snapshot
+on:
+  push:
+    branches: [ 'master', 'mui5-support' ]
+
+jobs:
+  release-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: coursier/cache-action@v6
+      - uses: coursier/setup-action@v1.2.0-M3
+        with:
+          apps: sbt
+
+      - name: publish snapshot
+        run: sbt ci-release
+        env:
+          PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+          PGP_SECRET: ${{ secrets.PGP_SECRET }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
