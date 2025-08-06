@@ -37,3 +37,6 @@ trait BaseModule extends ScalaModule {
 
 object mcore extends BaseModule
 object mlogging extends BaseModule
+object mts extends BaseModule {
+  def moduleDeps = Seq(mcore, mlogging)
+}
