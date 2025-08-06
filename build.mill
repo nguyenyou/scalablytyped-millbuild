@@ -64,3 +64,7 @@ object `mimporter-portable` extends BaseModule with BuildInfo {
     BuildInfo.Value("version", "0.0.1"),
   )
 }
+
+object mimporter extends BaseModule {
+  def moduleDeps = Seq(`mimporter-portable`)
+}
