@@ -40,3 +40,7 @@ object mlogging extends BaseModule
 object mts extends BaseModule {
   def moduleDeps = Seq(mcore, mlogging)
 }
+
+object mscalajs extends BaseModule {
+  def moduleDeps = Seq(mcore, mlogging)
+}
