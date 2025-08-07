@@ -48,11 +48,13 @@ object Main {
   )
 
   case class Config(
-      conversion:     ConversionOptions,
-      wantedLibs:     SortedSet[TsIdentLibrary],
-      inDirectory:    os.Path,
-      includeDev:     Boolean,
-      includeProject: Boolean,
+      conversion:          ConversionOptions,
+      wantedLibs:          SortedSet[TsIdentLibrary],
+      inDirectory:         os.Path,
+      includeDev:          Boolean,
+      includeProject:      Boolean,
+      publishLocalFolder:  os.Path,
+      sourceOutputDir:     os.Path,
   ) {
     lazy val paths = new Paths(inDirectory)
     def mapConversion(f: ConversionOptions => ConversionOptions) = copy(conversion = f(conversion))
@@ -60,10 +62,12 @@ object Main {
 
   val DefaultConfig = Config(
     DefaultOptions,
-    wantedLibs     = SortedSet(),
-    inDirectory    = os.pwd,
-    includeDev     = false,
-    includeProject = false,
+    wantedLibs          = SortedSet(),
+    inDirectory         = os.pwd,
+    includeDev          = false,
+    includeProject      = false,
+    publishLocalFolder  = os.pwd / "facades",
+    sourceOutputDir     = os.pwd / "out",
   )
 
   val parseCachePath = Some(files.existing(constants.defaultCacheFolder / 'parse).toNIO)
@@ -152,6 +156,12 @@ object Main {
       opt[String]("organization")
         .action((x, c) => c.mapConversion(_.copy(organization = x)))
         .text(s"Organization used (locally) publish artifacts"),
+      opt[os.Path]("cacheDir")
+        .action((x, c) => c.copy(publishLocalFolder = x))
+        .text(s"Directory to use for local cache/publishing (default: <workdir>/facades)"),
+      opt[os.Path]("sourceDir")
+        .action((x, c) => c.copy(sourceOutputDir = x))
+        .text(s"Directory to output generated source files (default: <workdir>/out)"),
       opt[Seq[String]]("ignoredLibs")
         .action((x, c) => c.mapConversion(_.copy(ignored = x.toSet.sorted)))
         .text(s"Libraries you want to ignore"),
@@ -199,6 +209,8 @@ object Main {
             inDir,
             includeDev,
             includeProject,
+            publishLocalFolder,
+            sourceOutputDir,
           ),
           ) =>
         val packageJsonPath = c.paths.packageJson.getOrElse(sys.error(s"$inDir does not contain package.json"))
@@ -288,9 +300,9 @@ object Main {
               new Phase3Compile(
                 versions                   = conversion.versions,
                 compiler                   = compiler,
-                targetFolder               = c.paths.out,
+                targetFolder               = c.sourceOutputDir,
                 organization               = conversion.organization,
-                publishLocalFolder         = constants.defaultLocalPublishFolder,
+                publishLocalFolder         = c.publishLocalFolder,
                 metadataFetcher            = Npmjs.No,
                 softWrites                 = true,
                 flavour                    = conversion.flavourImpl,
