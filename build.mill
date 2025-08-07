@@ -4,6 +4,7 @@
 import mill.*, scalalib.*
 import os.*
 import mill.contrib.buildinfo.BuildInfo
+import mill.scalajslib.ScalaJSModule
 
 
 trait BaseModule extends ScalaModule {
@@ -71,4 +72,9 @@ object mimporter extends BaseModule {
 
 object mcli extends BaseModule {
   def moduleDeps = Seq(mimporter)
+}
+
+object mruntime extends ScalaJSModule {
+  def scalaVersion = "2.12.18"
+  def scalaJSVersion = "1.19.0"
 }
