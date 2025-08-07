@@ -2,7 +2,7 @@
 //| mvnDeps: ["com.lihaoyi::mill-contrib-buildinfo:$MILL_VERSION"]
 
 import mill.*, scalalib.*
-
+import os.*
 import mill.contrib.buildinfo.BuildInfo
 
 
@@ -60,8 +60,8 @@ object `mimporter-portable` extends BaseModule with BuildInfo {
   val buildInfoPackageName = "org.scalablytyped.converter.internal"
 
   def buildInfoMembers = Seq(
-    BuildInfo.Value("gitSha", "53c93a260139b8eef078e3c45af3a1354d7d6779"),
-    BuildInfo.Value("version", "0.0.1"),
+    BuildInfo.Value("gitSha", os.proc("git", "rev-parse", "HEAD").call().out.trim()),
+    BuildInfo.Value("version", "0.1.0"),
   )
 }
 
