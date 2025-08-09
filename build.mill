@@ -1,0 +1,104 @@
+//| mill-version: 1.0.3
+//| mvnDeps: ["com.lihaoyi::mill-contrib-buildinfo:$MILL_VERSION"]
+
+import mill.*, scalalib.*
+import os.*
+import mill.contrib.buildinfo.BuildInfo
+import mill.scalajslib.*
+import mill.scalajslib.api.*
+
+object Versions {
+    val scala3 = "3.7.0"
+    val sjs = "1.19.0"
+    val sjsdom = "2.8.0"
+    val laminar = "17.2.1"
+}
+
+
+trait BaseModule extends ScalaModule {
+  def scalaVersion = "2.12.18"
+  def mvnDeps = Seq(
+    // Core Libraries
+    mvn"com.lihaoyi::ammonite-ops:2.4.0",
+    mvn"com.lihaoyi::os-lib:0.9.3",
+    mvn"com.lihaoyi::sourcecode:0.3.1",
+    mvn"com.lihaoyi::fansi:0.4.0",
+    
+    // Parsing & Language
+    mvn"org.scala-lang.modules::scala-parser-combinators:1.1.2",
+    mvn"org.scala-lang.modules::scala-xml:2.2.0",
+    mvn"org.scala-lang:scalap:2.12.18",
+    
+    // JSON Processing (Circe)
+    mvn"org.scalablytyped.circe013::circe-generic:0.13.0-shaded-2",
+    mvn"org.scalablytyped.circe013::circe-jackson29:0.13.0-shaded-2",
+    
+    // Build & Development Tools
+    mvn"ch.epfl.scala::bloop-frontend:1.5.4",
+    mvn"io.get-coursier::coursier:2.1.8",
+    mvn"com.github.scopt::scopt:4.1.0",
+    
+    // Cloud & Storage
+    mvn"software.amazon.awssdk:s3:2.15.28"
+  )
+
+  object test extends ScalaTests {
+    def mvnDeps = Seq(mvn"com.lihaoyi::utest:0.9.0")
+    def testFramework = "utest.runner.Framework"
+  }
+}
+
+object mcore extends BaseModule
+object mlogging extends BaseModule
+object mts extends BaseModule {
+  def moduleDeps = Seq(mcore, mlogging)
+}
+
+object mscalajs extends BaseModule {
+  def moduleDeps = Seq(mcore, mlogging)
+}
+
+object mphases extends BaseModule {
+  def moduleDeps = Seq(mcore, mlogging)
+}
+
+object `mimporter-portable` extends BaseModule with BuildInfo {
+  def moduleDeps = Seq(mphases, mts, mscalajs)
+
+ 
+  val buildInfoPackageName = "org.scalablytyped.converter.internal"
+
+  def buildInfoMembers = Seq(
+    BuildInfo.Value("gitSha", os.proc("git", "rev-parse", "HEAD").call().out.trim()),
+    BuildInfo.Value("version", "0.1.0"),
+  )
+}
+
+object mimporter extends BaseModule {
+  def moduleDeps = Seq(`mimporter-portable`)
+}
+
+object mcli extends BaseModule {
+  def moduleDeps = Seq(mimporter)
+}
+
+
+object mruntime extends ScalaJSModule {
+  def scalaVersion = "2.12.18"
+  def scalaJSVersion = "1.19.0"
+}
+
+
+trait WebModule extends ScalaJSModule {
+  def scalaVersion = Versions.scala3
+  def scalaJSVersion = Versions.sjs
+  def moduleKind = ModuleKind.ESModule
+  def moduleSplitStyle = ModuleSplitStyle.FewestModules
+}
+
+object www extends WebModule {
+  def mvnDeps = Seq(
+    mvn"com.raquo::laminar::${Versions.laminar}",
+    mvn"org.scala-js::scalajs-dom::${Versions.sjsdom}"
+  )
+}

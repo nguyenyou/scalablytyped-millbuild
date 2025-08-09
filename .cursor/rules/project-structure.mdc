@@ -1,0 +1,28 @@
+---
+alwaysApply: true
+---
+# Project Structure Guide
+
+This repository contains the Scala-based ScalablyTyped converter and a new TypeScript service prototype.
+
+Key docs and entry points:
+- Architecture overview: [docs/architecture.md](mdc:docs/architecture.md)
+- Port plan (TS compiler backend): [docs/porting-to-ts-compiler.md](mdc:docs/porting-to-ts-compiler.md)
+- Full rewrite plan (TypeScript): [docs/rewrite-in-typescript.md](mdc:docs/rewrite-in-typescript.md)
+
+Scala converter (current pipeline):
+- Phase 1 (TS parsing + transforms): [mimporter-portable/src/org/scalablytyped/converter/internal/importer/Phase1ReadTypescript.scala](mdc:mimporter-portable/src/org/scalablytyped/converter/internal/importer/Phase1ReadTypescript.scala)
+- TS IR model: [mcore/src/org/scalablytyped/converter/internal/ts/trees.scala](mdc:mcore/src/org/scalablytyped/converter/internal/ts/trees.scala)
+- Phase 2 (TS→Scala.js + transforms): [mimporter-portable/src/org/scalablytyped/converter/internal/importer/Phase2ToScalaJs.scala](mdc:mimporter-portable/src/org/scalablytyped/converter/internal/importer/Phase2ToScalaJs.scala)
+- Scala code emission: [mscalajs/src/org/scalablytyped/converter/internal/scalajs/Printer.scala](mdc:mscalajs/src/org/scalablytyped/converter/internal/scalajs/Printer.scala)
+
+TypeScript service (prototype):
+- Package: [tools/ts-service/package.json](mdc:tools/ts-service/package.json)
+- TS config: [tools/ts-service/tsconfig.json](mdc:tools/ts-service/tsconfig.json)
+- Analyzer entry: [tools/ts-service/src/analyzer.ts](mdc:tools/ts-service/src/analyzer.ts)
+- Minimal IR: [tools/ts-service/src/ir.ts](mdc:tools/ts-service/src/ir.ts)
+- Tests: [tools/ts-service/tests/analyzer.test.ts](mdc:tools/ts-service/tests/analyzer.test.ts)
+
+Dev commands (from `tools/ts-service`):
+- Run tests: `npm test`
+- Build: `npm run build`

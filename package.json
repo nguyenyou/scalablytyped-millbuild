@@ -1,0 +1,15 @@
+{
+  "name": "scalablytyped-converter",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "clsx": "2.1.1",
+    "quill": "2.0.3"
+  },
+  "devDependencies": {
+    "typescript": "5.9.2",
+    "vite": "7.1.1"
+  }
+}

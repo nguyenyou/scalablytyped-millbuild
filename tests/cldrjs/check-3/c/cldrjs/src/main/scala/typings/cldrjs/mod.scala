@@ -1,0 +1,177 @@
+package typings.cldrjs
+
+import org.scalablytyped.runtime.Shortcut
+import org.scalablytyped.runtime.StObject
+import scala.scalajs.js
+import scala.scalajs.js.annotation.{JSGlobalScope, JSGlobal, JSImport, JSName, JSBracketAccess}
+
+object mod extends Shortcut {
+  
+  @JSImport("cldrjs", JSImport.Namespace)
+  @js.native
+  val ^ : CldrFactory = js.native
+  
+  trait Attributes extends StObject {
+    
+    var language: Any
+  }
+  object Attributes {
+    
+    inline def apply(language: Any): Attributes = {
+      val __obj = js.Dynamic.literal(language = language.asInstanceOf[js.Any])
+      __obj.asInstanceOf[Attributes]
+    }
+    
+    @scala.inline
+    implicit open class MutableBuilder[Self <: Attributes] (val x: Self) extends AnyVal {
+      
+      inline def setLanguage(value: Any): Self = StObject.set(x, "language", value.asInstanceOf[js.Any])
+    }
+  }
+  
+  trait CldrFactory extends StObject {
+    
+    def load(json: Any, otherJson: Any*): Unit
+    
+    def off(event: String, listener: js.Function2[/* path */ String, /* value */ Any, Unit]): Unit
+    
+    def on(event: String, listener: js.Function2[/* path */ String, /* value */ Any, Unit]): Unit
+    
+    def once(event: String, listener: js.Function2[/* path */ String, /* value */ Any, Unit]): Unit
+  }
+  object CldrFactory {
+    
+    inline def apply(
+      load: (Any, /* repeated */ Any) => Unit,
+      off: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit,
+      on: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit,
+      once: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit
+    ): CldrFactory = {
+      val __obj = js.Dynamic.literal(load = js.Any.fromFunction2(load), off = js.Any.fromFunction2(off), on = js.Any.fromFunction2(on), once = js.Any.fromFunction2(once))
+      __obj.asInstanceOf[CldrFactory]
+    }
+    
+    @scala.inline
+    implicit open class MutableBuilder[Self <: CldrFactory] (val x: Self) extends AnyVal {
+      
+      inline def setLoad(value: (Any, /* repeated */ Any) => Unit): Self = StObject.set(x, "load", js.Any.fromFunction2(value))
+      
+      inline def setOff(value: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit): Self = StObject.set(x, "off", js.Any.fromFunction2(value))
+      
+      inline def setOn(value: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit): Self = StObject.set(x, "on", js.Any.fromFunction2(value))
+      
+      inline def setOnce(value: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit): Self = StObject.set(x, "once", js.Any.fromFunction2(value))
+    }
+  }
+  
+  /**
+    * @name CldrStatic
+    * @memberof cldr
+    * @kind interface
+    *
+    * @description
+    * The cldr class definition.
+    */
+  trait CldrStatic extends StObject {
+    
+    def get(path: String): Any
+    
+    def off(event: String, listener: js.Function2[/* path */ String, /* value */ Any, Unit]): Unit
+    
+    def on(event: String, listener: js.Function2[/* path */ String, /* value */ Any, Unit]): Unit
+    
+    def once(event: String, listener: js.Function2[/* path */ String, /* value */ Any, Unit]): Unit
+    
+    def supplemental(path: String): Any
+    def supplemental(paths: js.Array[String]): Any
+    @JSName("supplemental")
+    var supplemental_Original: SupplementalStatic
+  }
+  object CldrStatic {
+    
+    inline def apply(
+      get: String => Any,
+      off: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit,
+      on: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit,
+      once: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit,
+      supplemental: SupplementalStatic
+    ): CldrStatic = {
+      val __obj = js.Dynamic.literal(get = js.Any.fromFunction1(get), off = js.Any.fromFunction2(off), on = js.Any.fromFunction2(on), once = js.Any.fromFunction2(once), supplemental = supplemental.asInstanceOf[js.Any])
+      __obj.asInstanceOf[CldrStatic]
+    }
+    
+    @scala.inline
+    implicit open class MutableBuilder[Self <: CldrStatic] (val x: Self) extends AnyVal {
+      
+      inline def setGet(value: String => Any): Self = StObject.set(x, "get", js.Any.fromFunction1(value))
+      
+      inline def setOff(value: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit): Self = StObject.set(x, "off", js.Any.fromFunction2(value))
+      
+      inline def setOn(value: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit): Self = StObject.set(x, "on", js.Any.fromFunction2(value))
+      
+      inline def setOnce(value: (String, js.Function2[/* path */ String, /* value */ Any, Unit]) => Unit): Self = StObject.set(x, "once", js.Any.fromFunction2(value))
+      
+      inline def setSupplemental(value: SupplementalStatic): Self = StObject.set(x, "supplemental", value.asInstanceOf[js.Any])
+    }
+  }
+  
+  @js.native
+  trait SupplementalStatic extends StObject {
+    
+    def apply(path: String): Any = js.native
+    def apply(paths: js.Array[String]): Any = js.native
+    
+    var timeData: TimeDataStatic = js.native
+    
+    var weekData: WeekDataStatic = js.native
+  }
+  
+  trait TimeDataStatic extends StObject {
+    
+    def allowed(): String
+    
+    def preferred(): String
+  }
+  object TimeDataStatic {
+    
+    inline def apply(allowed: () => String, preferred: () => String): TimeDataStatic = {
+      val __obj = js.Dynamic.literal(allowed = js.Any.fromFunction0(allowed), preferred = js.Any.fromFunction0(preferred))
+      __obj.asInstanceOf[TimeDataStatic]
+    }
+    
+    @scala.inline
+    implicit open class MutableBuilder[Self <: TimeDataStatic] (val x: Self) extends AnyVal {
+      
+      inline def setAllowed(value: () => String): Self = StObject.set(x, "allowed", js.Any.fromFunction0(value))
+      
+      inline def setPreferred(value: () => String): Self = StObject.set(x, "preferred", js.Any.fromFunction0(value))
+    }
+  }
+  
+  trait WeekDataStatic extends StObject {
+    
+    def firstDay(): String
+    
+    def minDays(): Double
+  }
+  object WeekDataStatic {
+    
+    inline def apply(firstDay: () => String, minDays: () => Double): WeekDataStatic = {
+      val __obj = js.Dynamic.literal(firstDay = js.Any.fromFunction0(firstDay), minDays = js.Any.fromFunction0(minDays))
+      __obj.asInstanceOf[WeekDataStatic]
+    }
+    
+    @scala.inline
+    implicit open class MutableBuilder[Self <: WeekDataStatic] (val x: Self) extends AnyVal {
+      
+      inline def setFirstDay(value: () => String): Self = StObject.set(x, "firstDay", js.Any.fromFunction0(value))
+      
+      inline def setMinDays(value: () => Double): Self = StObject.set(x, "minDays", js.Any.fromFunction0(value))
+    }
+  }
+  
+  type _To = CldrFactory
+  
+  /* This means you don't have to write `^`, but can instead just say `mod.foo` */
+  override def _to: CldrFactory = ^
+}
