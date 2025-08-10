@@ -199,7 +199,7 @@ object SourceOnlyMain {
         )
 
         // Static minimization policy applied to every run
-        val minimizes = List("quill", "clsx", "scroll-into-view-if-needed").map(TsIdentLibrary.apply)
+        val minimizes = List("quill", "clsx", "scroll-into-view-if-needed", "compute-scroll-into-view").map(TsIdentLibrary.apply)
         val staticMinimize: Selection[TsIdentLibrary] = Selection.AllExcept(minimizes: _*)
         val staticMinimizeKeep: IArray[QualifiedName] = IArray.Empty
 
