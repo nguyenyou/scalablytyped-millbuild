@@ -92,13 +92,16 @@ object mruntime extends ScalaJSModule {
 trait WebModule extends ScalaJSModule {
   def scalaVersion = Versions.scala3
   def scalaJSVersion = Versions.sjs
-  def moduleKind = ModuleKind.ESModule
-  def moduleSplitStyle = ModuleSplitStyle.FewestModules
 }
 
 object www extends WebModule {
+  def moduleKind = ModuleKind.ESModule
+  def moduleSplitStyle = ModuleSplitStyle.FewestModules
+
   def mvnDeps = Seq(
     mvn"com.raquo::laminar::${Versions.laminar}",
     mvn"org.scala-js::scalajs-dom::${Versions.sjsdom}"
   )
 }
+
+object runtime extends WebModule 
