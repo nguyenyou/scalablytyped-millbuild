@@ -104,18 +104,6 @@ trait WebModule extends ScalaJSModule {
   def scalaJSVersion = Versions.sjs
 }
 
-// ScalaJS-compatible TypeScript parser bridge
-object mts_bridge extends WebModule {
-  def scalaVersion = "2.12.18"  // Keep same version as mts for compatibility
-  def scalaJSVersion = Versions.sjs
-
-  def moduleDeps = Seq(mcorejs)  // Depend on ScalaJS-compatible core
-
-  def mvnDeps = Seq(
-    mvn"org.scala-lang.modules::scala-parser-combinators:1.1.2"
-  )
-}
-
 object www extends WebModule {
   def moduleKind = ModuleKind.ESModule
   def moduleSplitStyle = ModuleSplitStyle.FewestModules
