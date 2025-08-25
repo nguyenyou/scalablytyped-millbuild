@@ -11,3 +11,4 @@ out
 node_modules
 generated-sources
 my-sources
+dist
