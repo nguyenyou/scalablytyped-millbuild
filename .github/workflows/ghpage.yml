@@ -13,11 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v4
         with:
           node-version: 24
       - run: |
-          npm install
+          bun install
 
       - name: Setup Pages
         id: setup_pages
@@ -32,7 +35,7 @@ jobs:
         run: ./mill www.fullLinkJS
 
       - name: Build Vite
-        run: npm run build
+        run: bun run build
         env:
           PAGES_BASE_PATH: ${{ steps.setup_pages.outputs.base_path }}
 
