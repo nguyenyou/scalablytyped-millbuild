@@ -95,7 +95,11 @@ object mcorejs extends ScalaJSModule {
 
   // Only include ScalaJS-compatible dependencies
   def mvnDeps = Seq(
-    mvn"com.lihaoyi::sourcecode:0.3.1"
+    mvn"com.lihaoyi::sourcecode:0.3.1",
+    // Latest Circe version with Scala.js support
+    mvn"io.circe::circe-core:0.14.14",
+    mvn"io.circe::circe-generic:0.14.14",
+    mvn"io.circe::circe-parser:0.14.14"
   )
 }
 
