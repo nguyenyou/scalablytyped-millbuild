@@ -69,6 +69,7 @@ sealed trait TsIdent {
 object TsIdent {
   val namespaced = TsIdentSimple("__namespaced")
   val Destructured = TsIdentSimple("__destructured")
+  val default = TsIdentSimple("default")
 
   def apply(str: String): TsIdentSimple = TsIdentSimple(str)
   def unapply(ident: TsIdent): Option[String] = Some(ident.value)
@@ -261,6 +262,19 @@ case class TsTypeRef(
     tparams: IArray[TsType]
 ) extends TsType
 
+object TsTypeRef {
+  val undefined = TsTypeRef(
+    NoComments,
+    TsQIdent(IArray(TsIdentSimple("undefined"))),
+    IArray.Empty
+  )
+  val `null` = TsTypeRef(
+    NoComments,
+    TsQIdent(IArray(TsIdentSimple("null"))),
+    IArray.Empty
+  )
+}
+
 case class TsTypeLiteral(literal: TsLiteral) extends TsType
 
 case class TsTypeObject(
@@ -271,6 +285,26 @@ case class TsTypeObject(
 case class TsTypeFunction(signature: TsFunSig) extends TsType
 
 case class TsTypeUnion(types: IArray[TsType]) extends TsType
+
+object TsTypeUnion {
+  def simplified(types: IArray[TsType]): TsType = {
+    val builder = IArray.Builder.empty[TsType]
+    types.foreach {
+      case TsTypeUnion(nested) => nested.foreach(builder += _)
+      case other               => builder += other
+    }
+    val flattened = builder.result()
+
+    // Simple deduplication using toList
+    val distinct = IArray.fromArray(flattened.toList.distinct.toArray[TsType])
+
+    distinct.length match {
+      case 0 => TsTypeRef.undefined // fallback
+      case 1 => distinct(0)
+      case _ => TsTypeUnion(distinct)
+    }
+  }
+}
 
 case class TsTypeIntersect(types: IArray[TsType]) extends TsType
 

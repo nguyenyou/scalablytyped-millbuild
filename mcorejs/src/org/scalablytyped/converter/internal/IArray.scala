@@ -278,6 +278,31 @@ final class IArray[+A <: AnyRef](
     sb.toString
   }
 
+  def partition(p: A => Boolean): (IArray[A], IArray[A]) = {
+    val trues = IArray.Builder.empty[A]
+    val falses = IArray.Builder.empty[A]
+    var i = 0
+    while (i < length) {
+      val elem = apply(i)
+      if (p(elem)) trues += elem
+      else falses += elem
+      i += 1
+    }
+    (trues.result(), falses.result())
+  }
+
+  def startsWith[B >: A <: AnyRef](that: IArray[B]): Boolean = {
+    if (that.length > length) false
+    else {
+      var i = 0
+      while (i < that.length) {
+        if (apply(i) != that(i)) return false
+        i += 1
+      }
+      true
+    }
+  }
+
   def mkString: String = mkString("", "", "")
   def mkString(sep: String): String = mkString("", sep, "")
 
