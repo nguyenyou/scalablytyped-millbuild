@@ -370,6 +370,21 @@ case class TsMemberCtor(
     signature: TsFunSig
 ) extends TsMember
 
+// Indexing types
+sealed trait Indexing extends TsTree
+object Indexing {
+  case class Dict(name: TsIdent, tpe: TsType) extends Indexing
+  case class Single(name: TsQIdent) extends Indexing
+}
+
+case class TsMemberIndex(
+    comments: Comments,
+    readonly: ReadonlyModifier,
+    level: ProtectionLevel,
+    indexing: Indexing,
+    valueType: Option[TsType]
+) extends TsMember
+
 case class TsEnumMember(
     name: TsIdent,
     expr: Option[TsExpr],

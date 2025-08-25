@@ -36,6 +36,7 @@ trait HasClassMembers {
         case x: TsMemberFunction => x
         case x: TsMemberProperty => x
         case x: TsMemberCtor     => x
+        case x: TsMemberIndex    => x
       }
 
     val map = named.groupBy {
@@ -43,6 +44,11 @@ trait HasClassMembers {
       case x: TsMemberProperty => x.name
       case _: TsMemberCall     => TsIdent("apply") // Simplified for now
       case _: TsMemberCtor     => TsIdent("constructor") // Simplified for now
+      case x: TsMemberIndex =>
+        x.indexing match {
+          case Indexing.Single(qname) => qname.parts.last
+          case Indexing.Dict(name, _) => name
+        }
     }
     (map, unnamed)
   }

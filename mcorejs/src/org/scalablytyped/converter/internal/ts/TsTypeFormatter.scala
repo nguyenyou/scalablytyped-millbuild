@@ -70,6 +70,19 @@ class TsTypeFormatter(val keepComments: Boolean) {
 
     case TsMemberCtor(_, _, s) =>
       s"new ${sig(s)}"
+
+    case TsMemberIndex(_, readonly, l, indexing, valueType) =>
+      val readonlyStr = readonly match {
+        case ReadonlyModifier.Yes => "readonly "
+        case _                    => ""
+      }
+      val levelStr = level(l).map(_ + " ").getOrElse("")
+      val indexingStr = indexing match {
+        case Indexing.Dict(name, tpe) => s"[${name.value}: ${apply(tpe)}]"
+        case Indexing.Single(name)    => s"[${qident(name)}]"
+      }
+      val valueTypeStr = valueType.map(tpe => s": ${apply(tpe)}").getOrElse("")
+      s"$readonlyStr$levelStr$indexingStr$valueTypeStr"
   }
 
   def lit(lit: TsLiteral): String = lit match {

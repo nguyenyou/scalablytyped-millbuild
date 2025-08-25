@@ -321,6 +321,83 @@ final class IArray[+A <: AnyRef](
   def dropRight(n: Int): IArray[A] =
     IArray.fromArrayAndSize[A](array, math.max(0, length - n))
 
+  def take(n: Int): IArray[A] = {
+    val newLength = math.min(n, length)
+    if (newLength == 0) return IArray.Empty
+    if (newLength == length) return this
+    val ret = Array.ofDim[AnyRef](newLength)
+    System.arraycopy(array, 0, ret, 0, newLength)
+    IArray.fromArrayAndSize[A](ret, newLength)
+  }
+
+  def collect[B <: AnyRef](pf: PartialFunction[A, B]): IArray[B] = {
+    val builder = IArray.Builder.empty[B]
+    var i = 0
+    while (i < length) {
+      val elem = apply(i)
+      if (pf.isDefinedAt(elem)) {
+        builder += pf(elem)
+      }
+      i += 1
+    }
+    builder.result()
+  }
+
+  def collectFirst[B](pf: PartialFunction[A, B]): Option[B] = {
+    var i = 0
+    while (i < length) {
+      val elem = apply(i)
+      if (pf.isDefinedAt(elem)) {
+        return Some(pf(elem))
+      }
+      i += 1
+    }
+    None
+  }
+
+  def sorted[B >: A](implicit ord: Ordering[B]): IArray[A] = {
+    if (length <= 1) return this
+    val sorted = array.clone()
+    java.util.Arrays.sort(
+      sorted.asInstanceOf[Array[Object]],
+      ord.asInstanceOf[Ordering[Object]]
+    )
+    IArray.fromArrayAndSize[A](sorted, length)
+  }
+
+  def distinct: IArray[A] = {
+    if (length <= 1) return this
+    val seen = scala.collection.mutable.Set.empty[A]
+    val builder = IArray.Builder.empty[A]
+    var i = 0
+    while (i < length) {
+      val elem = apply(i)
+      if (!seen.contains(elem)) {
+        seen += elem
+        builder += elem
+      }
+      i += 1
+    }
+    builder.result()
+  }
+
+  def maxBy[B](f: A => B)(implicit ord: Ordering[B]): A = {
+    if (isEmpty) throw new UnsupportedOperationException("empty.maxBy")
+    var maxElem = apply(0)
+    var maxValue = f(maxElem)
+    var i = 1
+    while (i < length) {
+      val elem = apply(i)
+      val value = f(elem)
+      if (ord.gt(value, maxValue)) {
+        maxElem = elem
+        maxValue = value
+      }
+      i += 1
+    }
+    maxElem
+  }
+
   def toList: List[A] = {
     val builder = List.newBuilder[A]
     var i = 0
