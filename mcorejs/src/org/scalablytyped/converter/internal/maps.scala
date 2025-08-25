@@ -103,7 +103,7 @@ object maps {
       TreeMap() ++ m
 
     @inline def firstDefined[U](f: (K, V) => Option[U]): Option[U] = {
-      val it = m.toIterator
+      val it = m.iterator
 
       while (it.hasNext) {
         it.next() match {

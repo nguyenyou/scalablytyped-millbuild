@@ -19,7 +19,7 @@ object TsExpr {
       case Ref(value)                    => TsTypeFormatter.qident(value)
       case Literal(TsLiteral.Str(value)) => stringUtils.quote(value)
       case Literal(Num.Long(long)) =>
-        if (long > Int.MaxValue) long + ".0" // long's wont work in scala.js, so we'll just YOLO this
+        if (long > Int.MaxValue) s"${long}.0" // long's wont work in scala.js, so we'll just YOLO this
         else long.toString
       case Literal(TsLiteral.Num(value))  => value
       case Literal(TsLiteral.Bool(value)) => value.toString
