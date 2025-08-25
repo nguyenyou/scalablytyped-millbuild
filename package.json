@@ -1,13 +1,16 @@
 {
   "name": "scalablytyped-converter",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "vite"
   },
   "dependencies": {
+    "@tailwindcss/vite": "4.1.12",
     "clsx": "2.1.1",
     "quill": "2.0.3",
-    "scroll-into-view-if-needed": "3.1.0"
+    "scroll-into-view-if-needed": "3.1.0",
+    "tailwindcss": "4.1.12"
   },
   "devDependencies": {
     "typescript": "5.9.2",

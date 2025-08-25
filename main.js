@@ -1,4 +1,4 @@
-import { clsx } from 'clsx'
+import "./styles.css"
 
 if (process.env.NODE_ENV === "development") {
   import("./out/www/fastLinkJS.dest/main.js");
