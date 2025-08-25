@@ -135,6 +135,10 @@ object mtsjs extends SjsModule {
   )
 }
 
+object mscalajsjs extends SjsModule {
+  def moduleDeps = Seq(mcorejs, mloggingjs)
+}
+
 object www extends WebModule {
   def moduleKind = ModuleKind.ESModule
   def moduleSplitStyle = ModuleSplitStyle.FewestModules
