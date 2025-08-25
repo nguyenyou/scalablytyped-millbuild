@@ -98,7 +98,6 @@ trait SjsModule extends WebModule {
   def scalacOptions = Seq(
     "-rewrite",
     "-source", "3.7-migration",
-    "-source", "3.4-migration",
     "-feature",
     "-deprecation",
     "-language:implicitConversions"
