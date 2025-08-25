@@ -129,6 +129,10 @@ object mloggingjs extends SjsModule {
 // ScalaJS-compatible TypeScript processing module
 object mtsjs extends SjsModule {
   def moduleDeps = Seq(mcorejs, mloggingjs)
+
+  def mvnDeps = Seq(
+    mvn"org.scala-lang.modules::scala-parser-combinators::2.4.0",
+  )
 }
 
 object www extends WebModule {
