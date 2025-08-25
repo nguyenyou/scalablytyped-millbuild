@@ -10,7 +10,9 @@ sealed trait TsTree extends Serializable with Product {
   lazy val asString: String = {
     val name = this match {
       case named: TsNamedDecl => named.name.value
-      case _                  => ""
+      case TsMemberProperty(_, _, TsIdent(str), _, _, _, _) => str
+      case TsMemberFunction(_, _, TsIdent(str), _, _, _, _) => str
+      case _                                                => ""
     }
     s"${getClass.getSimpleName}($name)"
   }
@@ -20,17 +22,15 @@ sealed trait TsContainerOrDecl extends TsTree
 
 sealed trait TsDecl extends TsContainerOrDecl
 
-sealed trait TsContainer
-    extends TsContainerOrDecl
-    with MemberCache
-    with CodePath.Has {
+sealed trait TsContainer extends TsContainerOrDecl with MemberCache with CodePath.Has {
   def members: IArray[TsContainerOrDecl]
+
   def withMembers(newMembers: IArray[TsContainerOrDecl]): TsContainer
 }
 
 sealed trait TsNamedDecl extends TsDecl with CodePath.Has {
   val comments: Comments
-  def withComments(cs: Comments): TsNamedDecl
+  def withComments(cs:    Comments): TsNamedDecl
   final def addComment(c: Comment) = withComments(comments + c)
 
   def name: TsIdent
@@ -187,6 +187,10 @@ case class TsDeclEnum(
     copy(codePath = newCodePath)
 }
 
+sealed trait TsDeclNamespaceOrModule extends TsContainer with TsNamedValueDecl with JsLocation.Has
+
+sealed trait TsDeclModuleLike extends TsDeclNamespaceOrModule
+
 case class TsDeclNamespace(
     comments: Comments,
     declared: Boolean,
@@ -226,6 +230,29 @@ case class TsDeclModule(
     copy(codePath = newCodePath)
   def withJsLocation(newLocation: JsLocation): TsDeclModule =
     copy(jsLocation = newLocation)
+}
+
+final case class TsAugmentedModule(
+                                    comments:   Comments,
+                                    name:       TsIdentModule,
+                                    members:    IArray[TsContainerOrDecl],
+                                    codePath:   CodePath,
+                                    jsLocation: JsLocation,
+                                  ) extends TsDeclModuleLike {
+  override def withMembers(newMembers: IArray[TsContainerOrDecl]): TsAugmentedModule =
+    copy(members = newMembers)
+
+  override def withCodePath(newCodePath: CodePath): TsAugmentedModule =
+    copy(codePath = newCodePath)
+
+  override def withJsLocation(newLocation: JsLocation): TsAugmentedModule =
+    copy(jsLocation = newLocation)
+
+  override def withName(name: TsIdentSimple): TsDeclNamespace =
+    TsDeclNamespace(NoComments, declared = false, name, members, codePath, jsLocation)
+
+  override def withComments(cs: Comments): TsAugmentedModule =
+    copy(comments = cs)
 }
 
 case class TsGlobal(
@@ -333,7 +360,8 @@ case class TsTypeParam(
     upperBound: Option[TsType],
     default: Option[TsType],
     comments: Comments
-)
+) extends TsTree
+
 
 // Members
 sealed trait TsMember
@@ -392,14 +420,15 @@ case class TsEnumMember(
 )
 
 // Literals
-sealed trait TsLiteral {
-  def literal: String
+sealed abstract class TsLiteral(repr: String) extends TsTree {
+  val literal = repr
 }
 
-case class TsLiteralString(literal: String) extends TsLiteral
-case class TsLiteralNumber(literal: String) extends TsLiteral
-case class TsLiteralBoolean(literal: String) extends TsLiteral
-
+object TsLiteral {
+  final case class Num(value:  String) extends TsLiteral(value)
+  final case class Str(value:  String) extends TsLiteral(value)
+  final case class Bool(value: Boolean) extends TsLiteral(value.toString)
+}
 // Import/Export related types
 sealed trait TsImported
 object TsImported {
@@ -426,3 +455,5 @@ object TsExportee {
   ) extends TsExportee
   case class Tree(tree: TsContainerOrDecl) extends TsExportee
 }
+
+final case class TsExportAsNamespace(ident: TsIdentSimple) extends TsDecl

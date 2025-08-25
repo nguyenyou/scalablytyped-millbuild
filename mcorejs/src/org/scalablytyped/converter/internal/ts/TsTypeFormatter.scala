@@ -86,9 +86,9 @@ class TsTypeFormatter(val keepComments: Boolean) {
   }
 
   def lit(lit: TsLiteral): String = lit match {
-    case TsLiteralString(str)   => s"'$str'"
-    case TsLiteralBoolean(bool) => bool
-    case TsLiteralNumber(num)   => num
+    case TsLiteral.Str(str)   => s"'$str'"
+    case TsLiteral.Bool(bool) => bool.toString
+    case TsLiteral.Num(num)   => num
   }
 
   def apply(tpe: TsType): String =
