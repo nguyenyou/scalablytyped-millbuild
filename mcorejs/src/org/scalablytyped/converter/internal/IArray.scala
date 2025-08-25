@@ -1,9 +1,15 @@
 package org.scalablytyped.converter.internal
 
+import io.circe.{Decoder, Encoder}
 import scala.collection.mutable
 import scala.collection.immutable.Range
 
 object IArray {
+  implicit def IArrayEncoder[T <: AnyRef: Encoder]: Encoder[IArray[T]] =
+    Encoder[List[T]].contramap[IArray[T]](_.toList)
+
+  implicit def IArrayDecoder[T <: AnyRef: Decoder]: Decoder[IArray[T]] =
+    Decoder[List[T]].map[IArray[T]](IArray.fromTraversable)
   def apply[A <: AnyRef](as: A*): IArray[A] =
     if (as.isEmpty) Empty else new IArray[A](as.toArray[AnyRef], as.length)
 

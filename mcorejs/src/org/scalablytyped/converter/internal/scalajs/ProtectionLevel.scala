@@ -1,5 +1,7 @@
 package org.scalablytyped.converter.internal.scalajs
 
+import io.circe.{Decoder, Encoder}
+
 sealed trait ProtectionLevel
 
 object ProtectionLevel {
@@ -15,4 +17,9 @@ object ProtectionLevel {
   case class Private(within: Option[Name]) extends ProtectionLevel
   case object Protected extends ProtectionLevel
   case object Public extends ProtectionLevel
+
+  implicit val encodes: Encoder[ProtectionLevel] =
+    io.circe.generic.semiauto.deriveEncoder
+  implicit val decodes: Decoder[ProtectionLevel] =
+    io.circe.generic.semiauto.deriveDecoder
 }
