@@ -2,6 +2,7 @@ package www
 
 import org.scalajs.dom
 import com.raquo.laminar.api.L.*
+import org.scalablytyped.converter.internal.ts.parser
 
 case class App() {
 
@@ -18,9 +19,7 @@ case class App() {
 
   // Parse the TypeScript content using the mtsjs parser
   val astContent = try {
-    import org.scalablytyped.converter.internal.ts.parser
     val parseResult = parser.parseString(dts)
-
     parseResult match {
       case Right(parsedFile) =>
         s"Successfully parsed! Found ${parsedFile.members.length} top-level declarations:\n" +
