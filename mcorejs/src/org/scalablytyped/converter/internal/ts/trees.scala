@@ -254,7 +254,7 @@ case class TsExport(
 ) extends TsContainerOrDecl
 
 // Type system
-sealed trait TsType
+sealed trait TsType extends TsTree
 
 case class TsTypeRef(
     comments: Comments,
@@ -308,6 +308,12 @@ object TsTypeUnion {
 
 case class TsTypeIntersect(types: IArray[TsType]) extends TsType
 
+// Conditional and infer types
+case class TsTypeConditional(pred: TsType, ifTrue: TsType, ifFalse: TsType)
+    extends TsType
+
+case class TsTypeInfer(tparam: TsTypeParam) extends TsType
+
 // Function signatures and parameters
 case class TsFunSig(
     comments: Comments,
@@ -350,6 +356,18 @@ case class TsMemberFunction(
     signature: TsFunSig,
     optional: OptionalModifier,
     static: Boolean
+) extends TsMember
+
+case class TsMemberCall(
+    comments: Comments,
+    level: ProtectionLevel,
+    signature: TsFunSig
+) extends TsMember
+
+case class TsMemberCtor(
+    comments: Comments,
+    level: ProtectionLevel,
+    signature: TsFunSig
 ) extends TsMember
 
 case class TsEnumMember(

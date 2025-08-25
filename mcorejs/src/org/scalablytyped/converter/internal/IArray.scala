@@ -111,6 +111,55 @@ object IArray {
       false
     }
 
+    def partitionCollect[A1 <: AnyRef](
+        t1: PartialFunction[A, A1]
+    ): (IArray[A1], IArray[A]) = {
+      val a1s = Array.ofDim[AnyRef](as.length)
+      var a1num = 0
+      val rest = Array.ofDim[AnyRef](as.length)
+      var restnum = 0
+
+      var idx = 0
+      while (idx < as.length) {
+        as(idx) match {
+          case t if t1.isDefinedAt(t) =>
+            a1s(a1num) = t1(t)
+            a1num += 1
+          case t =>
+            rest(restnum) = t
+            restnum += 1
+        }
+        idx += 1
+      }
+
+      (
+        fromArrayAndSize[A1](a1s, a1num),
+        fromArrayAndSize[A](rest, restnum)
+      )
+    }
+
+    def groupBy[K](f: A => K): Map[K, IArray[A]] = {
+      val groups = scala.collection.mutable.Map
+        .empty[K, scala.collection.mutable.ArrayBuffer[A]]
+
+      var idx = 0
+      while (idx < as.length) {
+        val elem = as(idx)
+        val key = f(elem)
+        groups.getOrElseUpdate(
+          key,
+          scala.collection.mutable.ArrayBuffer.empty[A]
+        ) += elem
+        idx += 1
+      }
+
+      groups.view
+        .mapValues(buf =>
+          IArray.fromArray(buf.toArray[AnyRef].asInstanceOf[Array[A]])
+        )
+        .toMap
+    }
+
     def partitionCollect3[A1 <: AnyRef, A2 <: AnyRef, A3 <: AnyRef](
         t1: PartialFunction[A, A1],
         t2: PartialFunction[A, A2],
@@ -175,6 +224,17 @@ final class IArray[+A <: AnyRef](
       i += 1
     }
     IArray.fromArrayAndSize[B](newArray, length)
+  }
+
+  def zipWithIndex: IArray[(A, Int)] = {
+    if (isEmpty) return IArray.Empty
+    val newArray = Array.ofDim[AnyRef](length)
+    var i = 0
+    while (i < length) {
+      newArray(i) = (apply(i), i)
+      i += 1
+    }
+    IArray.fromArrayAndSize[(A, Int)](newArray, length)
   }
 
   @inline def foreach(f: A => Unit): Unit = {

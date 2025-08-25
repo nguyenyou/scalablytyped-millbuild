@@ -22,3 +22,28 @@ trait MemberCache {
       case _                                   => true
     }
 }
+
+trait HasClassMembers {
+  def members: IArray[TsMember]
+
+  lazy val (
+    membersByName: Map[TsIdent, IArray[TsMember]],
+    unnamed: IArray[TsMember]
+  ) = {
+    val (named, unnamed: IArray[TsMember]) =
+      members.partitionCollect {
+        case x: TsMemberCall     => x
+        case x: TsMemberFunction => x
+        case x: TsMemberProperty => x
+        case x: TsMemberCtor     => x
+      }
+
+    val map = named.groupBy {
+      case x: TsMemberFunction => x.name
+      case x: TsMemberProperty => x.name
+      case _: TsMemberCall     => TsIdent("apply") // Simplified for now
+      case _: TsMemberCtor     => TsIdent("constructor") // Simplified for now
+    }
+    (map, unnamed)
+  }
+}

@@ -64,6 +64,12 @@ class TsTypeFormatter(val keepComments: Boolean) {
         Some(name.value),
         tpe.map(apply).map(":" + _)
       ).flatten.mkString(" ")
+
+    case TsMemberCall(_, l, s) =>
+      s"${level(l).getOrElse("")} ${sig(s)}"
+
+    case TsMemberCtor(_, _, s) =>
+      s"new ${sig(s)}"
   }
 
   def lit(lit: TsLiteral): String = lit match {
@@ -83,5 +89,9 @@ class TsTypeFormatter(val keepComments: Boolean) {
       case TsTypeFunction(s)      => s"${sig(s)}"
       case TsTypeUnion(types)     => types.map(apply).mkString(" | ")
       case TsTypeIntersect(types) => types.map(apply).mkString(" & ")
+      case TsTypeConditional(pred, ifTrue, ifFalse) =>
+        s"${apply(pred)} ? ${apply(ifTrue)} : ${apply(ifFalse)}"
+      case TsTypeInfer(tparam) =>
+        s"infer ${tparam.name.value}"
     }
 }
