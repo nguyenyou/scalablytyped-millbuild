@@ -88,15 +88,40 @@ object mruntime extends ScalaJSModule {
   def scalaJSVersion = "1.19.0"
 }
 
+// ScalaJS-compatible core module with essential TypeScript AST types
+object mcorejs extends ScalaJSModule {
+  def scalaVersion = Versions.scala3  // Keep same version as mcore for compatibility
+  def scalaJSVersion = Versions.sjs
+
+  // Only include ScalaJS-compatible dependencies
+  def mvnDeps = Seq(
+    mvn"com.lihaoyi::sourcecode:0.3.1"
+  )
+}
 
 trait WebModule extends ScalaJSModule {
   def scalaVersion = Versions.scala3
   def scalaJSVersion = Versions.sjs
 }
 
+// ScalaJS-compatible TypeScript parser bridge
+object mts_bridge extends WebModule {
+  def scalaVersion = "2.12.18"  // Keep same version as mts for compatibility
+  def scalaJSVersion = Versions.sjs
+
+  def moduleDeps = Seq(mcorejs)  // Depend on ScalaJS-compatible core
+
+  def mvnDeps = Seq(
+    mvn"org.scala-lang.modules::scala-parser-combinators:1.1.2"
+  )
+}
+
 object www extends WebModule {
   def moduleKind = ModuleKind.ESModule
   def moduleSplitStyle = ModuleSplitStyle.FewestModules
+
+
+  def moduleDeps = Seq(mcorejs)
 
   def mvnDeps = Seq(
     mvn"com.raquo::laminar::${Versions.laminar}",
