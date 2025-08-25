@@ -2,9 +2,6 @@
   "mcpServers": {
     "Converter-metals": {
       "url": "http://localhost:52833/sse"
-    },
-    "scalablytyped-millbuild-metals": {
-      "url": "http://localhost:58488/sse"
     }
   }
 }

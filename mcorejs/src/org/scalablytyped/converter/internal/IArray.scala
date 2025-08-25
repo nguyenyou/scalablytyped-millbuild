@@ -1028,7 +1028,7 @@ final class IArray[+A <: AnyRef](private val array: Array[AnyRef], val length: I
 
   private def occCounts[B <: AnyRef](sq: IArray[B]): mutable.Map[B, Int] = {
 //    val occ = new mutable.HashMap[B, Int] { override def default(k: B) = 0 }
-    val occ = new mutable.HashMap[B, Int].withDefault(_: B => 0)
+    val occ = new mutable.HashMap[B, Int].withDefault(_ => 0)
     for (y <- sq) occ(y) += 1
     occ
   }

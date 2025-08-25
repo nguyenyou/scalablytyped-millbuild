@@ -30,7 +30,6 @@ object Picker {
       t match {
         case _: TsDeclModule    => None
         case other: TsNamedDecl => Some(other)
-        case _                  => None
       }
   }
 
@@ -39,7 +38,6 @@ object Picker {
       t match {
         case _: TsDeclClass     => None
         case other: TsNamedDecl => Some(other)
-        case _                  => None
       }
   }
 
