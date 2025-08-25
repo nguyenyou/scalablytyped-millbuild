@@ -1,9 +1,9 @@
 package org.scalablytyped.converter.internal.ts
 
-sealed trait ProtectionLevel
+sealed trait TsProtectionLevel
 
-object ProtectionLevel {
-  case object Default extends ProtectionLevel
-  case object Private extends ProtectionLevel
-  case object Protected extends ProtectionLevel
+object TsProtectionLevel {
+  case object Default extends TsProtectionLevel
+  case object Private extends TsProtectionLevel
+  case object Protected extends TsProtectionLevel
 }

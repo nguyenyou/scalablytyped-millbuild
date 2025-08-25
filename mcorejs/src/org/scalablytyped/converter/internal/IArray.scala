@@ -245,6 +245,40 @@ final class IArray[+A <: AnyRef](
     }
   }
 
+  @inline def flatMap[B <: AnyRef](f: A => IArray[B]): IArray[B] = {
+    if (isEmpty) {
+      return IArray.Empty
+    }
+
+    val nested: IArray[IArray[B]] = map(f)
+
+    val newLength: Int = {
+      var value = 0
+      var i = 0
+      while (i < nested.length) {
+        value += nested(i).length
+        i += 1
+      }
+      value
+    }
+
+    val ret = Array.ofDim[AnyRef](newLength)
+    var i = 0
+    var o = 0
+    while (i < length) {
+      val bs: IArray[B] = nested(i)
+      var j = 0
+      while (j < bs.length) {
+        ret(o) = bs(j)
+        j += 1
+        o += 1
+      }
+
+      i += 1
+    }
+    IArray.fromArrayAndSize[B](ret, o)
+  }
+
   @inline def foldLeft[Z](z: Z)(f: (Z, A) => Z): Z = {
     var current = z
     var idx = 0

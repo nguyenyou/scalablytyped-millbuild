@@ -18,11 +18,11 @@ class TsTypeFormatter(val keepComments: Boolean) {
 
   def tparam(tparam: TsTypeParam): String =
     tparam match {
-      case TsTypeParam(name, bound, default, _) =>
+      case TsTypeParam(_, name, bound, default) =>
         List[Option[String]](
           Some(name.value),
           bound.map(b => s"extends ${apply(b)}"),
-          default.map(d => s"= " + apply(d))
+          default.map(d => s"= " + apply(d)),
         ).flatten.mkString(" ")
     }
 
@@ -38,11 +38,11 @@ class TsTypeFormatter(val keepComments: Boolean) {
   def tparams[T <: AnyRef](ts: IArray[T])(f: T => String): Option[String] =
     if (ts.isEmpty) None else Some("<" + ts.map(f).mkString(", ") + ">")
 
-  def level(l: ProtectionLevel): Option[String] =
+  def level(l: TsProtectionLevel): Option[String] =
     l match {
-      case ProtectionLevel.Default   => None
-      case ProtectionLevel.Private   => Some("private")
-      case ProtectionLevel.Protected => Some("protected")
+      case TsProtectionLevel.Default   => None
+      case TsProtectionLevel.Private   => Some("private")
+      case TsProtectionLevel.Protected => Some("protected")
     }
 
   def member(m: TsMember): String = m match {
@@ -71,18 +71,16 @@ class TsTypeFormatter(val keepComments: Boolean) {
     case TsMemberCtor(_, _, s) =>
       s"new ${sig(s)}"
 
-    case TsMemberIndex(_, readonly, l, indexing, valueType) =>
-      val readonlyStr = readonly match {
-        case ReadonlyModifier.Yes => "readonly "
-        case _                    => ""
-      }
-      val levelStr = level(l).map(_ + " ").getOrElse("")
-      val indexingStr = indexing match {
-        case Indexing.Dict(name, tpe) => s"[${name.value}: ${apply(tpe)}]"
-        case Indexing.Single(name)    => s"[${qident(name)}]"
-      }
-      val valueTypeStr = valueType.map(tpe => s": ${apply(tpe)}").getOrElse("")
-      s"$readonlyStr$levelStr$indexingStr$valueTypeStr"
+    case TsMemberIndex(_, isReadOnly, l, indexing, valueType) =>
+      List[Option[String]](
+        if (isReadOnly) Some("readonly") else None,
+        level(l),
+        Some(indexing match {
+          case Indexing.Dict(name, tpe) => s"[${name.value}: ${apply(tpe)}]"
+          case Indexing.Single(name)    => s"[${qident(name)}]"
+        }),
+        valueType.map(tpe => s": ${apply(tpe)}"),
+      ).flatten.mkString(" ").replace(" ?", "?")
   }
 
   def lit(lit: TsLiteral): String = lit match {
