@@ -88,41 +88,39 @@ object mruntime extends ScalaJSModule {
   def scalaJSVersion = "1.19.0"
 }
 
-// ScalaJS-compatible core module with essential TypeScript AST types
-object mcorejs extends ScalaJSModule {
-  def scalaVersion = Versions.scala3  // Keep same version as mcore for compatibility
-  def scalaJSVersion = Versions.sjs
-
-  // Only include ScalaJS-compatible dependencies
-  def mvnDeps = Seq(
-    mvn"com.lihaoyi::sourcecode:0.3.1",
-    // Latest Circe version with Scala.js support
-    mvn"io.circe::circe-core:0.14.14",
-    mvn"io.circe::circe-generic:0.14.14",
-    mvn"io.circe::circe-parser:0.14.14"
-  )
-}
-
-// ScalaJS-compatible TypeScript processing module
-object mtsjs extends ScalaJSModule {
-  def scalaVersion = Versions.scala3
-  def scalaJSVersion = Versions.sjs
-
-  def moduleDeps = Seq(mcorejs)
-
-  // Only include ScalaJS-compatible dependencies
-  def mvnDeps = Seq(
-    mvn"com.lihaoyi::sourcecode:0.3.1",
-    // Latest Circe version with Scala.js support
-    mvn"io.circe::circe-core:0.14.14",
-    mvn"io.circe::circe-generic:0.14.14",
-    mvn"io.circe::circe-parser:0.14.14"
-  )
-}
 
 trait WebModule extends ScalaJSModule {
   def scalaVersion = Versions.scala3
   def scalaJSVersion = Versions.sjs
+}
+
+trait SjsModule extends WebModule {
+  def scalacOptions = Seq(
+    "-rewrite",
+    "-source", "3.7-migration",
+    "-feature",
+    "-deprecation"
+  )
+
+  def mvnDeps = Seq(
+    mvn"com.lihaoyi::sourcecode:0.3.1",
+    // Latest Circe version with Scala.js support
+    mvn"io.circe::circe-core:0.14.14",
+    mvn"io.circe::circe-generic:0.14.14",
+    mvn"io.circe::circe-parser:0.14.14"
+  )
+}
+
+// ScalaJS-compatible core module with essential TypeScript AST types
+object mcorejs extends SjsModule {
+
+  // Only include ScalaJS-compatible dependencies
+
+}
+
+// ScalaJS-compatible TypeScript processing module
+object mtsjs extends SjsModule {
+  def moduleDeps = Seq(mcorejs)
 }
 
 object www extends WebModule {

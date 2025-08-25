@@ -1,15 +1,20 @@
-package org.scalablytyped.converter.internal
-package ts
+package org.scalablytyped.converter.internal.ts
 
 sealed trait OptionalModifier {
-  def isOptional: Boolean
+  def apply(tpe: TsType): TsType =
+    this match {
+      case OptionalModifier.Noop        => tpe
+      case OptionalModifier.Optionalize => OptionalType(tpe)
+      case OptionalModifier.Deoptionalize =>
+        tpe match {
+          case OptionalType(rest) => rest
+          case other              => other
+        }
+    }
 }
 
 object OptionalModifier {
-  case object No extends OptionalModifier {
-    def isOptional: Boolean = false
-  }
-  case object Yes extends OptionalModifier {
-    def isOptional: Boolean = true
-  }
+  case object Noop extends OptionalModifier
+  case object Optionalize extends OptionalModifier
+  case object Deoptionalize extends OptionalModifier
 }
