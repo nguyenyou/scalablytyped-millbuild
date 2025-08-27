@@ -49,7 +49,7 @@ object Versions {
 
   val Scala212 = Scala("2.12.18")
   val Scala213 = Scala("2.13.12")
-  val Scala3   = Scala("3.3.1")
+  val Scala3   = Scala("3.7.2")
 
   case class ScalaJs(scalaJsVersion: String) {
     val scalaJsBinVersion: String =
@@ -71,7 +71,7 @@ object Versions {
   implicit val encodes: Encoder[Versions] = io.circe013.generic.semiauto.deriveEncoder
   implicit val decodes: Decoder[Versions] = io.circe013.generic.semiauto.deriveDecoder
 
-  val ScalaJs1 = ScalaJs("1.11.0")
+  val ScalaJs1 = ScalaJs("1.19.0")
 }
 
 case class Versions(scala: Versions.Scala, scalaJs: Versions.ScalaJs) {
@@ -114,7 +114,7 @@ case class Versions(scala: Versions.Scala, scalaJs: Versions.ScalaJs) {
     else Some(Dep.ScalaFullVersion(scalaJs.scalaJsOrganization, "scalajs-compiler", scalaJs.scalaJsVersion))
 
   val runtime      = Dep.ScalaJs("com.olvind", "scalablytyped-runtime", "2.4.2")
-  val scalaJsDom   = Dep.ScalaJs("org.scala-js", "scalajs-dom", "2.3.0")
+  val scalaJsDom   = Dep.ScalaJs("org.scala-js", "scalajs-dom", "2.8.0")
   val slinkyWeb    = Dep.ScalaJs("me.shadaj", "slinky-web", "0.7.2")
   val slinkyNative = Dep.ScalaJs("me.shadaj", "slinky-native", "0.7.2").for3Use2_13(scala.is3)
   val scalajsReact = Dep.ScalaJs("com.github.japgolly.scalajs-react", "core", "2.1.1")

@@ -21,15 +21,12 @@ import java.util.regex.Pattern
 
 object ImportScalajsDefinitions {
   private val defaultVersions: Versions =
-    Versions(Versions.Scala213, Versions.ScalaJs1)
+    Versions(Versions.Scala3, Versions.ScalaJs1)
 
   val All: Array[AbsolutePath] = Await
     .result(
       BloopCompiler.resolve(
-        defaultVersions.scalajsReact.concrete(defaultVersions),
         defaultVersions.scalaJsDom.concrete(defaultVersions),
-        defaultVersions.slinkyWeb.concrete(defaultVersions),
-        defaultVersions.slinkyNative.concrete(defaultVersions),
         defaultVersions.scalaJsLibrary.concrete(defaultVersions),
         defaultVersions.runtime.concrete(defaultVersions),
       ),
