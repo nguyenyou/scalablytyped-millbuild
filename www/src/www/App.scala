@@ -5,12 +5,37 @@ import com.raquo.laminar.api.L.*
 import org.scalablytyped.converter.internal.ts.parser
 import www.components.LaminarComponent
 
+// JSON parsing imports
+import org.scalablytyped.converter.internal.Json
+import org.scalablytyped.converter.internal.scalajs.Tree
+import org.scalablytyped.converter.internal.IArray
+import org.scalajs.dom.fetch
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.scalajs.js
+import js.Thenable.Implicits.*
+
+// JSON parsing functions
+def parseJsonData(jsonString: String): Either[String, IArray[Tree]] = {
+  Json.apply[IArray[Tree]](jsonString) match {
+    case Left(error) => Left(s"JSON parsing error: ${error.getMessage}")
+    case Right(result) => Right(result)
+  }
+}
+
+def loadJsonData(url: String): Future[String] = {
+  fetch(url)
+    .toFuture
+    .flatMap(_.text().toFuture)
+}
+
 case class App() extends LaminarComponent {
 
   // State management
   val codeVar = Var(CodeInput.Examples.simple)
   val parseResultVar = Var[Either[String, org.scalablytyped.converter.internal.ts.TsParsedFile]](Right(null))
   val isParsingVar = Var(false)
+  val jsonTestResultVar = Var[Option[String]](None)
 
   // Parse function
   def parseCode(code: String): Unit = {
@@ -35,6 +60,19 @@ case class App() extends LaminarComponent {
     }, 100)
   }
 
+  // Test JSON parsing functionality
+  def testJsonParsing(): Unit = {
+    // Create a simple test JSON with Tree objects
+    val testJson = """[]"""  // Empty array for now - in a real scenario this would contain Tree JSON
+
+    parseJsonData(testJson) match {
+      case Right(trees) =>
+        jsonTestResultVar.set(Some(s"✅ JSON parsing successful! Parsed ${trees.length} trees"))
+      case Left(error) =>
+        jsonTestResultVar.set(Some(s"❌ JSON parsing failed: $error"))
+    }
+  }
+
   // Initialize with default example
   parseCode(codeVar.now())
 
@@ -50,6 +88,27 @@ case class App() extends LaminarComponent {
           div(
             h1(cls("text-2xl font-bold text-gray-900"), "TypeScript AST Parser"),
             p(cls("text-gray-600 text-sm mt-1"), "Parse TypeScript declaration files and explore their Abstract Syntax Tree")
+          ),
+          div(
+            text <-- jsonTestResultVar.signal.map(_.getOrElse("")),
+            button(
+              "Fetch json",
+              onClick --> Observer { _ =>
+                println("clicked")
+                loadJsonData("/resources/scalajs-definitions.json").onComplete {
+                  case scala.util.Success(jsonString) =>
+                    parseJsonData(jsonString) match {
+                      case Right(trees) =>
+                        jsonTestResultVar.set(Some(s"✅ JSON parsing successful! Parsed ${trees.length} trees"))
+                      case Left(error) =>
+                        jsonTestResultVar.set(Some(s"❌ JSON parsing failed: $error"))
+                    }
+                  case scala.util.Failure(exception) =>
+                    jsonTestResultVar.set(Some(s"❌ JSON parsing failed: ${exception.getMessage}"))
+                }
+                testJsonParsing()
+              }
+            )
           ),
           div(
             cls("flex items-center gap-4"),

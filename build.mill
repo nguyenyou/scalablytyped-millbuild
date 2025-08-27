@@ -137,6 +137,10 @@ object mtsjs extends SjsModule {
 
 object mscalajsjs extends SjsModule {
   def moduleDeps = Seq(mcorejs, mloggingjs)
+
+  def mvnDeps = Seq(
+    mvn"org.scala-js::scalajs-dom::${Versions.sjsdom}"
+  )
 }
 
 object www extends WebModule {
