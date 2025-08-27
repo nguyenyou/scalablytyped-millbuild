@@ -140,7 +140,7 @@ object org {
       }
       
       @js.native
-      abstract class AbstractRange () extends StObject {
+      class AbstractRange () extends StObject {
         
         def collapsed(): Boolean = js.native
         
@@ -625,7 +625,7 @@ object org {
       type BufferSource = js.typedarray.ArrayBufferView | js.typedarray.ArrayBuffer
       
       @js.native
-      abstract class CDATASection ()
+      class CDATASection ()
         extends StObject
            with Text
       
@@ -1230,7 +1230,7 @@ object org {
       }
       
       @js.native
-      abstract class Cache () extends StObject {
+      class Cache () extends StObject {
         
         def add(request: RequestInfo): js.Promise[Unit] = js.native
         
@@ -1444,7 +1444,7 @@ object org {
            with AudioNode
       
       @js.native
-      abstract class CharacterData ()
+      class CharacterData ()
         extends StObject
            with Node
            with NonDocumentTypeChildNode {
@@ -1739,7 +1739,7 @@ object org {
       }
       
       @js.native
-      abstract class CustomElementRegistry () extends StObject {
+      class CustomElementRegistry () extends StObject {
         
         def define(name: String, constructor: js.Dynamic, options: ElementDefinitionOptions): Unit = js.native
       }
@@ -2126,7 +2126,7 @@ object org {
       }
       
       @js.native
-      abstract class Document ()
+      class Document ()
         extends StObject
            with Node
            with NodeSelector
@@ -2233,7 +2233,7 @@ object org {
       }
       
       @js.native
-      abstract class DocumentFragment ()
+      class DocumentFragment ()
         extends StObject
            with Node
            with NodeSelector
@@ -2244,7 +2244,7 @@ object org {
            with js.Any
       
       @js.native
-      abstract class DocumentType ()
+      class DocumentType ()
         extends StObject
            with Node {
         
@@ -2323,7 +2323,7 @@ object org {
       }
       
       @js.native
-      abstract class Element ()
+      class Element ()
         extends StObject
            with Node
            with NodeSelector
@@ -2923,7 +2923,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLAnchorElement ()
+      class HTMLAnchorElement ()
         extends StObject
            with HTMLElement {
         
@@ -2959,7 +2959,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLAreaElement ()
+      class HTMLAreaElement ()
         extends StObject
            with HTMLElement {
         
@@ -2989,17 +2989,17 @@ object org {
       }
       
       @js.native
-      abstract class HTMLAudioElement ()
+      class HTMLAudioElement ()
         extends StObject
            with HTMLMediaElement
       
       @js.native
-      abstract class HTMLBRElement ()
+      class HTMLBRElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLBaseElement ()
+      class HTMLBaseElement ()
         extends StObject
            with HTMLElement {
         
@@ -3009,7 +3009,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLBodyElement ()
+      class HTMLBodyElement ()
         extends StObject
            with HTMLElement {
         
@@ -3043,7 +3043,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLButtonElement ()
+      class HTMLButtonElement ()
         extends StObject
            with HTMLElement {
         
@@ -3085,7 +3085,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLCanvasElement ()
+      class HTMLCanvasElement ()
         extends StObject
            with HTMLElement {
         
@@ -3099,7 +3099,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLCollection[E] ()
+      class HTMLCollection[E] ()
         extends StObject
            with DOMList[E] {
         
@@ -3109,12 +3109,12 @@ object org {
       }
       
       @js.native
-      abstract class HTMLDListElement ()
+      class HTMLDListElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLDataListElement ()
+      class HTMLDataListElement ()
         extends StObject
            with HTMLElement {
         
@@ -3122,7 +3122,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLDialogElement ()
+      class HTMLDialogElement ()
         extends StObject
            with HTMLElement {
         
@@ -3138,12 +3138,12 @@ object org {
       }
       
       @js.native
-      abstract class HTMLDivElement ()
+      class HTMLDivElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLDocument ()
+      class HTMLDocument ()
         extends StObject
            with Document {
         
@@ -3371,7 +3371,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLElement ()
+      class HTMLElement ()
         extends StObject
            with Element {
         
@@ -3577,7 +3577,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLEmbedElement ()
+      class HTMLEmbedElement ()
         extends StObject
            with HTMLElement
            with GetSVGDocument {
@@ -3590,7 +3590,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLFieldSetElement ()
+      class HTMLFieldSetElement ()
         extends StObject
            with HTMLElement {
         
@@ -3617,7 +3617,7 @@ object org {
            with HTMLCollection[RadioNodeList | Element]
       
       @js.native
-      abstract class HTMLFormElement ()
+      class HTMLFormElement ()
         extends StObject
            with HTMLElement {
         
@@ -3661,27 +3661,27 @@ object org {
       }
       
       @js.native
-      abstract class HTMLHRElement ()
+      class HTMLHRElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLHeadElement ()
+      class HTMLHeadElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLHeadingElement ()
+      class HTMLHeadingElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLHtmlElement ()
+      class HTMLHtmlElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLIFrameElement ()
+      class HTMLIFrameElement ()
         extends StObject
            with HTMLElement
            with GetSVGDocument {
@@ -3708,7 +3708,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLImageElement ()
+      class HTMLImageElement ()
         extends StObject
            with HTMLElement {
         
@@ -3736,7 +3736,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLInputElement ()
+      class HTMLInputElement ()
         extends StObject
            with HTMLElement {
         
@@ -3836,7 +3836,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLLIElement ()
+      class HTMLLIElement ()
         extends StObject
            with HTMLElement {
         
@@ -3844,7 +3844,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLLabelElement ()
+      class HTMLLabelElement ()
         extends StObject
            with HTMLElement {
         
@@ -3854,7 +3854,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLLegendElement ()
+      class HTMLLegendElement ()
         extends StObject
            with HTMLElement {
         
@@ -3864,7 +3864,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLLinkElement ()
+      class HTMLLinkElement ()
         extends StObject
            with HTMLElement
            with LinkStyle {
@@ -3885,7 +3885,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLMapElement ()
+      class HTMLMapElement ()
         extends StObject
            with HTMLElement {
         
@@ -3893,7 +3893,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLMediaElement ()
+      class HTMLMediaElement ()
         extends StObject
            with HTMLElement {
         
@@ -3976,7 +3976,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLMenuElement ()
+      class HTMLMenuElement ()
         extends StObject
            with HTMLElement {
         
@@ -3984,7 +3984,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLMetaElement ()
+      class HTMLMetaElement ()
         extends StObject
            with HTMLElement {
         
@@ -4000,7 +4000,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLModElement ()
+      class HTMLModElement ()
         extends StObject
            with HTMLElement {
         
@@ -4010,7 +4010,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLOListElement ()
+      class HTMLOListElement ()
         extends StObject
            with HTMLElement {
         
@@ -4018,7 +4018,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLObjectElement ()
+      class HTMLObjectElement ()
         extends StObject
            with HTMLElement
            with GetSVGDocument {
@@ -4063,7 +4063,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLOptGroupElement ()
+      class HTMLOptGroupElement ()
         extends StObject
            with HTMLElement {
         
@@ -4073,7 +4073,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLOptionElement ()
+      class HTMLOptionElement ()
         extends StObject
            with HTMLElement {
         
@@ -4102,12 +4102,12 @@ object org {
            with HTMLCollection[HTMLOptionElement]
       
       @js.native
-      abstract class HTMLParagraphElement ()
+      class HTMLParagraphElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLParamElement ()
+      class HTMLParamElement ()
         extends StObject
            with HTMLElement {
         
@@ -4117,12 +4117,12 @@ object org {
       }
       
       @js.native
-      abstract class HTMLPreElement ()
+      class HTMLPreElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLProgressElement ()
+      class HTMLProgressElement ()
         extends StObject
            with HTMLElement {
         
@@ -4136,7 +4136,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLQuoteElement ()
+      class HTMLQuoteElement ()
         extends StObject
            with HTMLElement {
         
@@ -4146,7 +4146,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLScriptElement ()
+      class HTMLScriptElement ()
         extends StObject
            with HTMLElement {
         
@@ -4168,7 +4168,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLSelectElement ()
+      class HTMLSelectElement ()
         extends StObject
            with HTMLElement {
         
@@ -4222,7 +4222,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLSourceElement ()
+      class HTMLSourceElement ()
         extends StObject
            with HTMLElement {
         
@@ -4234,12 +4234,12 @@ object org {
       }
       
       @js.native
-      abstract class HTMLSpanElement ()
+      class HTMLSpanElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLStyleElement ()
+      class HTMLStyleElement ()
         extends StObject
            with HTMLElement
            with LinkStyle {
@@ -4253,12 +4253,12 @@ object org {
       trait HTMLTableAlignment extends StObject
       
       @js.native
-      abstract class HTMLTableCaptionElement ()
+      class HTMLTableCaptionElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLTableCellElement ()
+      class HTMLTableCellElement ()
         extends StObject
            with HTMLElement
            with HTMLTableAlignment {
@@ -4273,7 +4273,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLTableColElement ()
+      class HTMLTableColElement ()
         extends StObject
            with HTMLElement
            with HTMLTableAlignment {
@@ -4282,7 +4282,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLTableElement ()
+      class HTMLTableElement ()
         extends StObject
            with HTMLElement {
         
@@ -4318,7 +4318,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLTableRowElement ()
+      class HTMLTableRowElement ()
         extends StObject
            with HTMLElement
            with HTMLTableAlignment {
@@ -4343,7 +4343,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLTableSectionElement ()
+      class HTMLTableSectionElement ()
         extends StObject
            with HTMLElement
            with HTMLTableAlignment {
@@ -4358,7 +4358,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLTemplateElement ()
+      class HTMLTemplateElement ()
         extends StObject
            with HTMLElement {
         
@@ -4366,7 +4366,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLTextAreaElement ()
+      class HTMLTextAreaElement ()
         extends StObject
            with HTMLElement {
         
@@ -4422,7 +4422,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLTitleElement ()
+      class HTMLTitleElement ()
         extends StObject
            with HTMLElement {
         
@@ -4430,7 +4430,7 @@ object org {
       }
       
       @js.native
-      abstract class HTMLTrackElement ()
+      class HTMLTrackElement ()
         extends StObject
            with HTMLElement {
         
@@ -4446,17 +4446,17 @@ object org {
       }
       
       @js.native
-      abstract class HTMLUListElement ()
+      class HTMLUListElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLUnknownElement ()
+      class HTMLUnknownElement ()
         extends StObject
            with HTMLElement
       
       @js.native
-      abstract class HTMLVideoElement ()
+      class HTMLVideoElement ()
         extends StObject
            with HTMLMediaElement {
         
@@ -5764,7 +5764,7 @@ object org {
       }
       
       @js.native
-      abstract class Node ()
+      class Node ()
         extends StObject
            with EventTarget {
         
@@ -6459,7 +6459,7 @@ object org {
       }
       
       @js.native
-      abstract class ProcessingInstruction ()
+      class ProcessingInstruction ()
         extends StObject
            with Node {
         
@@ -7317,7 +7317,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGAElement ()
+      class SVGAElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -7470,7 +7470,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGCircleElement ()
+      class SVGCircleElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -7487,7 +7487,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGClipPathElement ()
+      class SVGClipPathElement ()
         extends StObject
            with SVGElement
            with SVGUnitTypes
@@ -7501,7 +7501,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGComponentTransferFunctionElement ()
+      class SVGComponentTransferFunctionElement ()
         extends StObject
            with SVGElement {
         
@@ -7536,7 +7536,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGDefsElement ()
+      class SVGDefsElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -7546,14 +7546,14 @@ object org {
            with SVGExternalResourcesRequired
       
       @js.native
-      abstract class SVGDescElement ()
+      class SVGDescElement ()
         extends StObject
            with SVGElement
            with SVGStylable
            with SVGLangSpace
       
       @js.native
-      abstract class SVGElement ()
+      class SVGElement ()
         extends StObject
            with Element {
         
@@ -7615,7 +7615,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGEllipseElement ()
+      class SVGEllipseElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -7659,7 +7659,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEBlendElement ()
+      class SVGFEBlendElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -7687,7 +7687,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEColorMatrixElement ()
+      class SVGFEColorMatrixElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -7713,7 +7713,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEComponentTransferElement ()
+      class SVGFEComponentTransferElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -7722,7 +7722,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFECompositeElement ()
+      class SVGFECompositeElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -7760,7 +7760,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEConvolveMatrixElement ()
+      class SVGFEConvolveMatrixElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -7802,7 +7802,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEDiffuseLightingElement ()
+      class SVGFEDiffuseLightingElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -7819,7 +7819,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEDisplacementMapElement ()
+      class SVGFEDisplacementMapElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -7849,7 +7849,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEDistantLightElement ()
+      class SVGFEDistantLightElement ()
         extends StObject
            with SVGElement {
         
@@ -7859,33 +7859,33 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEFloodElement ()
+      class SVGFEFloodElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes
       
       @js.native
-      abstract class SVGFEFuncAElement ()
+      class SVGFEFuncAElement ()
         extends StObject
            with SVGComponentTransferFunctionElement
       
       @js.native
-      abstract class SVGFEFuncBElement ()
+      class SVGFEFuncBElement ()
         extends StObject
            with SVGComponentTransferFunctionElement
       
       @js.native
-      abstract class SVGFEFuncGElement ()
+      class SVGFEFuncGElement ()
         extends StObject
            with SVGComponentTransferFunctionElement
       
       @js.native
-      abstract class SVGFEFuncRElement ()
+      class SVGFEFuncRElement ()
         extends StObject
            with SVGComponentTransferFunctionElement
       
       @js.native
-      abstract class SVGFEGaussianBlurElement ()
+      class SVGFEGaussianBlurElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -7900,7 +7900,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEImageElement ()
+      class SVGFEImageElement ()
         extends StObject
            with SVGElement
            with SVGLangSpace
@@ -7912,13 +7912,13 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEMergeElement ()
+      class SVGFEMergeElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes
       
       @js.native
-      abstract class SVGFEMergeNodeElement ()
+      class SVGFEMergeNodeElement ()
         extends StObject
            with SVGElement {
         
@@ -7926,7 +7926,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEMorphologyElement ()
+      class SVGFEMorphologyElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -7950,7 +7950,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEOffsetElement ()
+      class SVGFEOffsetElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -7963,7 +7963,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFEPointLightElement ()
+      class SVGFEPointLightElement ()
         extends StObject
            with SVGElement {
         
@@ -7975,7 +7975,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFESpecularLightingElement ()
+      class SVGFESpecularLightingElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -7994,7 +7994,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFESpotLightElement ()
+      class SVGFESpotLightElement ()
         extends StObject
            with SVGElement {
         
@@ -8016,7 +8016,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFETileElement ()
+      class SVGFETileElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -8025,7 +8025,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFETurbulenceElement ()
+      class SVGFETurbulenceElement ()
         extends StObject
            with SVGElement
            with SVGFilterPrimitiveStandardAttributes {
@@ -8059,7 +8059,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGFilterElement ()
+      class SVGFilterElement ()
         extends StObject
            with SVGElement
            with SVGUnitTypes
@@ -8112,7 +8112,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGGElement ()
+      class SVGGElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -8122,7 +8122,7 @@ object org {
            with SVGExternalResourcesRequired
       
       @js.native
-      abstract class SVGGradientElement ()
+      class SVGGradientElement ()
         extends StObject
            with SVGElement
            with SVGUnitTypes
@@ -8149,7 +8149,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGImageElement ()
+      class SVGImageElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -8240,7 +8240,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGLineElement ()
+      class SVGLineElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -8289,7 +8289,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGMarkerElement ()
+      class SVGMarkerElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -8332,7 +8332,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGMaskElement ()
+      class SVGMaskElement ()
         extends StObject
            with SVGElement
            with SVGUnitTypes
@@ -8393,7 +8393,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGMetadataElement ()
+      class SVGMetadataElement ()
         extends StObject
            with SVGElement
       
@@ -8424,7 +8424,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGPathElement ()
+      class SVGPathElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -8796,7 +8796,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGPatternElement ()
+      class SVGPatternElement ()
         extends StObject
            with SVGElement
            with SVGUnitTypes
@@ -8853,7 +8853,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGPolygonElement ()
+      class SVGPolygonElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -8864,7 +8864,7 @@ object org {
            with SVGExternalResourcesRequired
       
       @js.native
-      abstract class SVGPolylineElement ()
+      class SVGPolylineElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -8942,7 +8942,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGRectElement ()
+      class SVGRectElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -8965,7 +8965,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGSVGElement ()
+      class SVGSVGElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -9063,7 +9063,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGScriptElement ()
+      class SVGScriptElement ()
         extends StObject
            with SVGElement
            with SVGExternalResourcesRequired
@@ -9073,7 +9073,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGStopElement ()
+      class SVGStopElement ()
         extends StObject
            with SVGElement
            with SVGStylable {
@@ -9110,7 +9110,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGStyleElement ()
+      class SVGStyleElement ()
         extends StObject
            with SVGElement
            with SVGLangSpace {
@@ -9123,7 +9123,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGSwitchElement ()
+      class SVGSwitchElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -9133,7 +9133,7 @@ object org {
            with SVGExternalResourcesRequired
       
       @js.native
-      abstract class SVGSymbolElement ()
+      class SVGSymbolElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -9142,7 +9142,7 @@ object org {
            with SVGExternalResourcesRequired
       
       @js.native
-      abstract class SVGTSpanElement ()
+      class SVGTSpanElement ()
         extends StObject
            with SVGTextPositioningElement
       
@@ -9159,7 +9159,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGTextContentElement ()
+      class SVGTextContentElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -9200,13 +9200,13 @@ object org {
       }
       
       @js.native
-      abstract class SVGTextElement ()
+      class SVGTextElement ()
         extends StObject
            with SVGTextPositioningElement
            with SVGTransformable
       
       @js.native
-      abstract class SVGTextPathElement ()
+      class SVGTextPathElement ()
         extends StObject
            with SVGTextContentElement
            with SVGURIReference {
@@ -9234,7 +9234,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGTextPositioningElement ()
+      class SVGTextPositioningElement ()
         extends StObject
            with SVGTextContentElement {
         
@@ -9250,7 +9250,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGTitleElement ()
+      class SVGTitleElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -9353,7 +9353,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGUseElement ()
+      class SVGUseElement ()
         extends StObject
            with SVGElement
            with SVGStylable
@@ -9377,7 +9377,7 @@ object org {
       }
       
       @js.native
-      abstract class SVGViewElement ()
+      class SVGViewElement ()
         extends StObject
            with SVGElement
            with SVGZoomAndPan
@@ -9606,7 +9606,7 @@ object org {
            with js.Any
       
       @js.native
-      abstract class ShadowRoot ()
+      class ShadowRoot ()
         extends StObject
            with DocumentFragment {
         

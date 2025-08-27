@@ -103,7 +103,7 @@ object slinky {
     }
     
     @js.native
-    abstract class Component ()
+    class Component ()
       extends StObject
          with slinky.core.facade.React.Component {
       
@@ -143,7 +143,7 @@ object slinky {
     }
     
     @js.native
-    abstract class DefinitionBase[Props, State, Snapshot] protected ()
+    class DefinitionBase[Props, State, Snapshot] protected ()
       extends StObject
          with slinky.core.facade.React.Component {
       def this(jsProps: js.Object) = this()
@@ -227,7 +227,7 @@ object slinky {
     trait StateWriterProvider extends StObject
     
     @js.native
-    abstract class StatelessComponent ()
+    class StatelessComponent ()
       extends StObject
          with Component {
       
@@ -237,7 +237,7 @@ object slinky {
     }
     
     @js.native
-    abstract class StatelessDefinition[Props, Snapshot] protected ()
+    class StatelessDefinition[Props, Snapshot] protected ()
       extends StObject
          with DefinitionBase[Props, Unit, Snapshot] {
       def this(jsProps: js.Object) = this()
