@@ -7,14 +7,15 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@tailwindcss/vite": "4.1.12",
+    "@types/tabulator-tables": "6.2.10",
     "clsx": "2.1.1",
-    "quill": "2.0.3",
     "scroll-into-view-if-needed": "3.1.0",
-    "tailwindcss": "4.1.12"
+    "tabulator-tables": "6.3.1"
   },
   "devDependencies": {
     "typescript": "5.9.2",
-    "vite": "7.1.1"
+    "vite": "7.1.1",
+    "@tailwindcss/vite": "4.1.12",
+    "tailwindcss": "4.1.12"
   }
 }
